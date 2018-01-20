@@ -32,7 +32,7 @@ Game type 2: Signals shown are... Red, Red, Green, Blue; you press Blue, Green, 
 "Longest" button will replay/demo the longest sequence ever completed  
 
 ### MISC  
-- Xerox creates a "config.ini" file upon first startup which is used to store settings; do not modify this file  
+- Xerox creates a 'config.ini' file upon first startup which is used to store settings; do not modify this file  
 - Controls for Xerox are exclusively handled by touching the on-screen buttons  
 - All assets for the game were custom-made using Gimp and Audacity
 
