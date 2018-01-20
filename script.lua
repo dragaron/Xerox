@@ -6,6 +6,9 @@
 ---------------------------------------------------------------------------------------------------
 --INITIALIZATION START-----------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------
+--Load default palette
+color.loadpalette()
+	
 	--Setup directory
 	if files.exists("samples/xerox.lua") then
 	dir = "samples/xerox/"
@@ -15,6 +18,8 @@
 
 	--Read from, or create if nonexistent, "config.ini" file
 	if files.exists(dir .. "config.ini") then
+	screen.print(10, 10, "Loading...")
+	screen.flip()
 	game_type = tonumber(ini.read(dir .. "config.ini", "game_type", 1))
 	skill_level = tonumber(ini.read(dir .. "config.ini", "skill_level", 1))
 	last_signal_max = tonumber(ini.read(dir .. "config.ini", "last_signal_max", 1))
@@ -22,6 +27,8 @@
 	longest_signal_max = tonumber(ini.read(dir .. "config.ini", "longest_signal_max", 1))
 	longest_signal_sequence = tonumber(ini.read(dir .. "config.ini", "longest_signal_sequence", 3))
 	else
+	screen.print(10, 10, "Please wait while the 'config.ini' file is created (only happens once)...")
+	screen.flip()
 	ini.write(dir .. "config.ini", "game_type", 1)
 	ini.write(dir .. "config.ini", "skill_level", 1)
 	ini.write(dir .. "config.ini", "last_signal_max", 1)
@@ -35,9 +42,6 @@
 	longest_signal_max = tonumber(ini.read(dir .. "config.ini", "longest_signal_max", 1))
 	longest_signal_sequence = tonumber(ini.read(dir .. "config.ini", "longest_signal_sequence", 3))
 	end
-
---Load 19 basic colors (red, green, blue, cyan, magenta, yellow, maroon, grass, navy, turquoise, violet, olive, white, gray, black, orange, chocolate, shine, shadow)
-color.loadpalette()
 
 
 --VFX----------------------------------------------------------------------------------------------
@@ -401,7 +405,7 @@ display_vfx01()
 button_held = 0
 display_vfx02()
 image.blit(vfx_xerox, 0, 0, 255)
-screen:flip()
+screen.flip()
 wait(15)
 	while current_signal <= current_signal_max do
 		for i = 1, 31 do
@@ -414,14 +418,14 @@ wait(15)
 	display_vfx02()
 	image.blit(vfx_xerox, 0, 0, 255)
 	screen.print(400, 3, "INFO: Playing past sequence...")
-	screen:flip()
+	screen.flip()
 	wait(1)
 	display_vfx01()
 	button_held = current_signal_value
 	display_vfx02()
 	image.blit(vfx_xerox, 0, 0, 255)
 	screen.print(400, 3, "INFO: Playing past sequence...")
-	screen:flip()
+	screen.flip()
 	button_pressed = current_signal_value
 	play_sfx()
 	wait(5)
@@ -473,7 +477,7 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: Press START to begin.")
-			screen:flip()
+			screen.flip()
 			play_sfx()
 				if button_pressed == 1 then
 				game_type = game_type + 1
@@ -531,7 +535,7 @@ end
 	button_held = 0
 	display_vfx02()
 	image.blit(vfx_xerox, 0, 0, 255)
-	screen:flip()
+	screen.flip()
 	wait(15)
 		while current_signal <= current_signal_max do
 			for i = 1, 31 do
@@ -544,14 +548,14 @@ end
 		display_vfx02()
 		image.blit(vfx_xerox, 0, 0, 255)
 		screen.print(400, 3, "INFO: Playing sequence...")
-		screen:flip()
+		screen.flip()
 		wait(1)
 		display_vfx01()
 		button_held = current_signal_value
 		display_vfx02()
 		image.blit(vfx_xerox, 0, 0, 255)
 		screen.print(400, 3, "INFO: Playing sequence...")
-		screen:flip()
+		screen.flip()
 		button_pressed = current_signal_value
 		play_sfx()
 		wait(5)
@@ -573,13 +577,13 @@ end
 	button_held = 0
 	display_vfx02()
 	image.blit(vfx_xerox, 0, 0, 255)
-	screen:flip()
+	screen.flip()
 	n = 255
 		while n > 155 do
 		display_vfx01()
 		display_vfx02()
 		image.blit(vfx_xerox, 0, 0, n)
-		screen:flip()
+		screen.flip()
 		n = n - 50
 		end
 	n = 155
@@ -587,7 +591,7 @@ end
 		display_vfx01()
 		display_vfx02()
 		image.blit(vfx_xerox, 0, 0, n)
-		screen:flip()
+		screen.flip()
 		n = n + 50
 		end
 		while current_signal <= current_signal_max do
@@ -614,7 +618,7 @@ end
 			draw.fillrect(389, 273, 180, 24, color.gray)
 			draw.fillrect(389, 273, n*3, 24, color.white)
 			screen.print(400, 3, "INFO: Enter sequence...  " .. current_signal .. "/" .. current_signal_max .. " (" .. total_signal_max .. ")")
-			screen:flip()
+			screen.flip()
 			pause(1)
 			n = n - 1
 				if button_pressed > 1 then
@@ -625,7 +629,7 @@ end
 		display_vfx02()
 		image.blit(vfx_xerox, 0, 0, 255)
 		screen.print(400, 3, "INFO: Enter sequence...  " .. current_signal .. "/" .. current_signal_max .. " (" .. total_signal_max .. ")")
-		screen:flip()
+		screen.flip()
 		play_sfx()
 		wait(5)
 			if button_pressed == current_signal_value then
@@ -636,7 +640,7 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: GAME OVER!")
-			screen:flip()
+			screen.flip()
 			button_pressed = 0
 			play_sfx()
 			sound.play(sfx_game_over)			
@@ -654,14 +658,14 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: CONGRATULATIONS!")
-			screen:flip()		
+			screen.flip()		
 			wait(10)
 			display_vfx01()
 			button_held = 3
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: CONGRATULATIONS!")
-			screen:flip()
+			screen.flip()
 			button_pressed = 3
 			play_sfx()
 			wait(5)
@@ -670,7 +674,7 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: CONGRATULATIONS!")
-			screen:flip()
+			screen.flip()
 			button_pressed = 4		
 			play_sfx()
 			wait(5)
@@ -679,7 +683,7 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: CONGRATULATIONS!")
-			screen:flip()
+			screen.flip()
 			button_pressed = 5		
 			play_sfx()
 			wait(5)
@@ -688,7 +692,7 @@ end
 			display_vfx02()
 			image.blit(vfx_xerox, 0, 0, 255)
 			screen.print(400, 3, "INFO: CONGRATULATIONS!")
-			screen:flip()
+			screen.flip()
 			button_pressed = 6		
 			play_sfx()
 			wait(15)
